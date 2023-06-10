@@ -21,8 +21,20 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Client> findAll(@RequestBody Client client){
+    public ResponseEntity<Client> save(@RequestBody Client client){
         return ResponseEntity.ok(clientService.save(client));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id,@RequestBody Client client){
+        Client toUpdate = clientService.findOne(id).get();
+        if(null != client.getAddress()){
+            toUpdate.setAddress(client.getAddress());
+        }
+        if(null != client.getName()){
+            toUpdate.setName(client.getName());
+        }
+        return ResponseEntity.ok(clientService.save(toUpdate));
     }
 
 
