@@ -4,9 +4,7 @@ import com.api.domain.Client;
 import com.api.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +19,11 @@ public class ClientController {
     public ResponseEntity<List<Client>> findAll(){
       return ResponseEntity.ok(clientService.findAll());
     }
+
+    @PostMapping
+    public ResponseEntity<Client> findAll(@RequestBody Client client){
+        return ResponseEntity.ok(clientService.save(client));
+    }
+
+
 }
